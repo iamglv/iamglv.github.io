@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intesa che vince!</title>
+<style>
+
+.tutto{
+    font-size: 200%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+  .container {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .countdown {
+    font-size: 48px;
+    margin-top: 20px;
+  }
+
+  .numeri {
+    display: flex;
+    justify-content: center;
+  }
+
+</style>
+</head>
+<body>
+  <div class="tutto">
+      <div class="container">
+        <button class="button" id="startButton"><p style="font-size: 200%">Clicca Qui</p></button>
+        <div style="font-size: 300%;" class="countdown" id="countdown">60</div>
+        </div>
+        <div id="myDiv" style="display:none;" class="numeri">
+            <button onclicK="giasto()" class="button" id="correctButton" style="background-color: green;"><p style="font-size: 200%">Giusto!</p></button>
+            <button onclick="sbagliato()" class="button" id="wrongButton" style="background-color: red;"><p style="font-size: 200%">Sbagliato!</p></button>
+          </div>
+          <button class="button" id="passobutton" onclick="passo()" style="background-color: yellow; "><p style="font-size: 200%">Passo</p></button>
+<div class="numeri">
+        <!-- <input type="button" name="answer" onclick="ShowDiv()" /> -->
+        <div class="numeri">
+            <p id="punti">0</p>
+            <p>-</p>
+            <p>-</p>
+            <p>-</p>
+            <p id="passo">3</p>
+          </div>
+      </div>
+
+  </div>
+
+  <script>
+    var giusto = 0;
+    var passo = 3;
+    let countdownInterval;
+    let countdownRunning = false;
+    let remainingCountdown = 60;
+    const countdownDisplay = document.getElementById('countdown');
+    const startButton = document.getElementById('startButton');
+
+    startButton.addEventListener('click', () => {
+    document.getElementById("myDiv").style.display = "none";
+      if (!countdownRunning) {
+        countdownRunning = true;
+        countdownInterval = setInterval(() => {
+          remainingCountdown--;
+          countdownDisplay.textContent = remainingCountdown;
+          if (remainingCountdown <= 0) {
+            clearInterval(countdownInterval);
+            countdownRunning = false;
+            countdownDisplay.textContent = '60';
+          }
+        }, 1000);
+      } else {
+        clearInterval(countdownInterval);
+        countdownRunning = false;
+    document.getElementById("myDiv").style.display = "";
+      }
+    });
+
+
+
+
+    function giasto(){
+        giusto = giusto + 1;
+        document.getElementById("punti").innerHTML = giusto;
+      };
+
+
+    function sbagliato(){
+      if(giusto > 0){
+         giusto = giusto - 1;
+        document.getElementById("punti").innerHTML = giusto;
+        return 0;
+      }
+else{
+  console.log("finepasso");
+}
+    };
+
+
+
+     const passoButton = document.getElementById('passobutton');
+ const passoElement = document.getElementById('passo');
+ passoButton.addEventListener('click', () => {
+   if (passo > 0) {
+     clearInterval(countdownInterval);
+     countdownRunning = false;
+     document.getElementById("passo").innerHTML = passo-1;
+    //  passoElement.textContent = parseInt(passoElement.textContent) - 1;
+    passo = passo-1;
+     console.log(passo);
+   } else if(passo===0){
+     console.log("Finalmente");
+   }
+ });
+
+
+
+
+  </script>
+</body>
+</html>

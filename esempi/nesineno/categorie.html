@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/esempi/nesineno/style.css">
+<link rel="stylesheet" href="/esempi/nesineno/style_categorie.css">
+<title>Categorie</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Lilita One;
+    background-color: #ffcf0c;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px;
+    margin-top: 6%;
+}
+
+.column {
+    flex: 0 0 40%;
+    max-width: 200px;
+    background-color: #f0f0f0;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.square {
+    width: 100%;
+    padding-top: 100%;
+    background-color: #007bff;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.square .text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px;
+    color: white;
+    font-size: 35px;
+    text-align: center;
+    z-index: 50;
+    text-align: center;
+}
+
+.square .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+/* Nuovo stile per le colonne orizzontali */
+.column.horizontal {
+    display: flex;
+    flex-direction: row; /* Imposta la direzione orizzontale */
+    justify-content: space-between; /* Aggiunge spazio tra i quadrati */
+}
+</style>
+</head>
+<body>
+  <h1 style="text-align: center; font-size: 300%; padding: 1%;">Scegli una categoria!</h1>
+  <div class="container">
+    <div class="column">
+      <a href="pre1.html">
+        <div class="square">
+          <div class="text">Casuale</div>
+          <img class="image" src="/categorie/casuale.png" alt="Square Image">
+        </div>
+      </a>
+      <a href="pre2.html">
+        <div class="square">
+          <div class="text">Sport</div>
+          <img class="image" src="/categorie/sport.png" alt="Square Image">
+        </div>
+      </a>
+    </div>
+    <div class="column">
+      <a href="pre3.html">
+        <div class="square">
+          <div class="text" style="font-size: 175%;">Lavoro/
+            Scuola</div>
+          <img class="image" src="categorie/lavoro.png" alt="Square Image">
+        </div>
+      </a>
+      <a href="pre4.html">
+        <div class="square">
+          <div class="text" style="font-size: 185%;">Geografia</div>
+          <img class="image" src="categorie/geo.png" alt="Square Image">
+        </div>
+      </a>
+    </div>
+    <div class="column">
+      <a href="pre5.html">
+        <div class="square">
+          <div class="text" style="font-size: 175%;">Gen Z/Boomers</div>
+          <img class="image" src="/categorie/boomers.png" alt="Square Image">
+        </div>
+      </a>
+      <a href="pre6.html">
+        <div class="square">
+          <div class="text" style="font-size: 180%;">Tecnologia</div>
+          <img class="image" src="/categorie/it.png" alt="Square Image">
+        </div>
+      </a>
+    </div>
+    <div class="column">
+      <a href="pre7.html">
+        <div class="square">
+          <div class="text">Cucina</div>
+          <img class="image" src="/categorie/cucina.png" alt="Square Image">
+        </div>
+      </a>
+      <a href="pre8.html">
+        <div class="square">
+          <div class="text">Arte</div>
+          <img class="image" src="/categorie/musica.png" alt="Square Image">
+        </div>
+      </a>
+    </div>
+    <!-- <div class="column">
+      <a href="">
+        <div class="square">
+          <div class="text">Quadrato 9</div>
+          <img class="image" src="square.png" alt="Square Image">
+        </div>
+      </a>
+      <a href="">
+        <div class="square">
+          <div class="text">Quadrato 10</div>
+          <img class="image" src="square.png" alt="Square Image">
+        </div>
+      </a>
+    </div> -->
+  </div>
+</body>
+</html>

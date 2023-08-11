@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style_categorie.css">
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Lilita One;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px;
+    margin-top: 6%;
+}
+
+.column {
+    flex: 0 0 40%;
+    max-width: 200px;
+    background-color: #f0f0f0;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.square {
+    width: 100%;
+    padding-top: 100%;
+    background-color: #007bff;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.square .text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px;
+    color: white;
+    font-size: 35px;
+    text-align: center;
+}
+
+.square .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+/* Nuovo stile per le colonne orizzontali */
+.column.horizontal {
+    display: flex;
+    flex-direction: row; /* Imposta la direzione orizzontale */
+    justify-content: space-between; /* Aggiunge spazio tra i quadrati */
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="column">
+      <a href="">
+        <div class="square">
+          <div class="text">Quadrato 1</div>
+          <img class="image" src="square.png" alt="Square Image">
+        </div>
+      </a>
+      <a href="">
+        <div class="square">
+          <div class="text">Quadrato 2</div>
+          <img class="image" src="square.png" alt="Square Image">
+        </div>
+      </a>
+    </div>
+    <div class="column">
+      <a href="">
+        <div class="square">
+          <div class="text">Quadrato 3</div>
+          <img class="image" src="square.png" alt="Square Image">
+        </div>
+      </a>
+      <a href="">
+        <div class="square">
+          <div class="text">Quadrato 4</div>
+          <img class="image" src="square.png" alt="Square Image">
+        </div>
+      </a>
+    </div>
+    <div class="column">
+      <a href="">
+        <div class="square">
+          <div class="text">Quadrato 5</div>
+          <img class="image" src="square.png" alt="Square Image">
+        </div>
+      </a>
+      <a href="">
+        <div class="square">
+          <div class="text">Quadrato 6</div>
+          <img class="image" src="square.png" alt="Square Image">
+        </div>
+      </a>
+    </div>
+    <div class="column">
+      <a href="">
+        <div class="square">
+          <div class="text">Quadrato 7</div>
+          <img class="image" src="square.png" alt="Square Image">
+        </div>
+      </a>
+      <a href="">
+        <div class="square">
+          <div class="text">Quadrato 8</div>
+          <img class="image" src="square.png" alt="Square Image">
+        </div>
+      </a>
+    </div>
+    <div class="column">
+      <a href="">
+        <div class="square">
+          <div class="text">Quadrato 9</div>
+          <img class="image" src="square.png" alt="Square Image">
+        </div>
+      </a>
+      <a href="">
+        <div class="square">
+          <div class="text">Quadrato 10</div>
+          <img class="image" src="square.png" alt="Square Image">
+        </div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
