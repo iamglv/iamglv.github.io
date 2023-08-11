@@ -1,2 +1,0 @@
-Streamer Pack
-Include cam overlay, scene di inizio, fine e pausa, configurazione obs, alert, server Discord,
