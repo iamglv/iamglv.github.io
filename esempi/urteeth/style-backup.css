@@ -1,0 +1,255 @@
+@charset "UTF-8";
+/*!
+ *
+ * bttn.css - https://ganapativs.github.io/bttn.css
+ * Version - 0.2.4
+ * Demo: https://bttn.surge.sh
+ *
+ * Licensed under the MIT license - http://opensource.org/licenses/MIT
+ *
+ * Copyright (c) 2016 Ganapati V S (@ganapativs)
+ *
+ */
+/* standalone - .bttn-float */
+.bttn-default {
+  color: #fff;
+}
+.bttn-primary,
+.bttn,
+.bttn-lg,
+.bttn-md,
+.bttn-sm,
+.bttn-xs {
+  color: #1d89ff;
+}
+.bttn-warning {
+  color: #feab3a;
+}
+.bttn-danger {
+  color: #ff5964;
+}
+.bttn-success {
+  color: #28b78d;
+}
+.bttn-royal {
+  color: #bd2df5;
+}
+.bttn,
+.bttn-lg,
+.bttn-md,
+.bttn-sm,
+.bttn-xs {
+  margin: 0;
+  padding: 0;
+  border-width: 0;
+  border-color: transparent;
+  background: transparent;
+  font-weight: 400;
+  cursor: pointer;
+  position: relative;
+}
+.bttn-lg {
+  padding: 8px 15px;
+  font-size: 24px;
+  font-family: inherit;
+}
+.bttn-md {
+  font-size: 20px;
+  font-family: inherit;
+  padding: 5px 12px;
+}
+.bttn-sm {
+  padding: 4px 10px;
+  font-size: 16px;
+  font-family: inherit;
+}
+.bttn-xs {
+  padding: 3px 8px;
+  font-size: 12px;
+  font-family: inherit;
+}
+.bttn-float {
+  margin: 0;
+  padding: 0;
+  border-width: 0;
+  border-color: transparent;
+  background: transparent;
+  font-weight: 400;
+  cursor: pointer;
+  position: relative;
+  font-size: 20px;
+  font-family: inherit;
+  padding: 5px 12px;
+  overflow: hidden;
+  border: 1px dotted #fff;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.4);
+  color: #fff;
+  -webkit-transition: opacity 0.3s cubic-bezier(0.02, 0.01, 0.47, 1), box-shadow 0.2s cubic-bezier(0.02, 0.01, 0.47, 1), -webkit-transform 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+  transition: opacity 0.3s cubic-bezier(0.02, 0.01, 0.47, 1), box-shadow 0.2s cubic-bezier(0.02, 0.01, 0.47, 1), -webkit-transform 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+  transition: transform 0.3s cubic-bezier(0.02, 0.01, 0.47, 1), opacity 0.3s cubic-bezier(0.02, 0.01, 0.47, 1), box-shadow 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
+  transition: transform 0.3s cubic-bezier(0.02, 0.01, 0.47, 1), opacity 0.3s cubic-bezier(0.02, 0.01, 0.47, 1), box-shadow 0.2s cubic-bezier(0.02, 0.01, 0.47, 1), -webkit-transform 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+.bttn-float:hover,
+.bttn-float:focus {
+  box-shadow: 0 30px 30px rgba(0,0,0,0.16);
+  opacity: 0.85;
+  -webkit-transition: opacity 0.2s cubic-bezier(0.02, 0.01, 0.47, 1), box-shadow 0.4s cubic-bezier(0.02, 0.01, 0.47, 1), -webkit-transform 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
+  transition: opacity 0.2s cubic-bezier(0.02, 0.01, 0.47, 1), box-shadow 0.4s cubic-bezier(0.02, 0.01, 0.47, 1), -webkit-transform 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
+  transition: transform 0.2s cubic-bezier(0.02, 0.01, 0.47, 1), opacity 0.2s cubic-bezier(0.02, 0.01, 0.47, 1), box-shadow 0.4s cubic-bezier(0.02, 0.01, 0.47, 1);
+  transition: transform 0.2s cubic-bezier(0.02, 0.01, 0.47, 1), opacity 0.2s cubic-bezier(0.02, 0.01, 0.47, 1), box-shadow 0.4s cubic-bezier(0.02, 0.01, 0.47, 1), -webkit-transform 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+.bttn-float.bttn-xs {
+  padding: 3px 8px;
+  font-size: 12px;
+  font-family: inherit;
+}
+.bttn-float.bttn-xs:hover,
+.bttn-float.bttn-xs:focus {
+  -webkit-transform: translateY(-6px);
+          transform: translateY(-6px);
+}
+.bttn-float.bttn-sm {
+  padding: 4px 10px;
+  font-size: 16px;
+  font-family: inherit;
+}
+.bttn-float.bttn-sm:hover,
+.bttn-float.bttn-sm:focus {
+  -webkit-transform: translateY(-8px);
+          transform: translateY(-8px);
+}
+.bttn-float.bttn-md {
+  font-size: 20px;
+  font-family: inherit;
+  padding: 5px 12px;
+}
+.bttn-float.bttn-md:hover,
+.bttn-float.bttn-md:focus {
+  -webkit-transform: translateY(-10px);
+          transform: translateY(-10px);
+}
+.bttn-float.bttn-lg {
+  padding: 8px 15px;
+  font-size: 24px;
+  font-family: inherit;
+}
+.bttn-float.bttn-lg:hover,
+.bttn-float.bttn-lg:focus {
+  -webkit-transform: translateY(-12px);
+          transform: translateY(-12px);
+}
+.bttn-float.bttn-default {
+  border-color: #fff;
+  background: rgba(255,255,255,0.4);
+  color: #fff;
+}
+.bttn-float.bttn-primary {
+  border-color: #1d89ff;
+  background: rgba(29,137,255,0.4);
+  color: #1d89ff;
+}
+.bttn-float.bttn-warning {
+  border-color: #feab3a;
+  background: rgba(254,171,58,0.4);
+  color: #feab3a;
+}
+.bttn-float.bttn-danger {
+  border-color: #ff5964;
+  background: rgba(255,89,100,0.4);
+  color: #ff5964;
+}
+.bttn-float.bttn-success {
+  border-color: #28b78d;
+  background: rgba(40,183,141,0.4);
+  color: #28b78d;
+}
+.bttn-float.bttn-royal {
+  border-color: #bd2df5;
+  background: rgba(189,45,245,0.4);
+  color: #bd2df5;
+}
+
+/*STOP*/
+
+
+body {
+    font-family: 'Comfortaa', sans-serif;
+  }
+  
+  body.popup-active {
+          filter: blur(5px);
+          opacity: 0.5;
+        }
+  
+  body::before {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  
+        /* Stili per l'immagine centrata */
+        #image {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        #image img {
+    max-width: 300%;
+    height: auto;
+    width: 80%;
+  }
+        /* Stili per la progressbar */
+        #progressbar {
+          margin: 25px auto;
+          width: 80%;
+          background-color: rgb(237, 227, 227);
+          height: 10%;
+          text-align: center;
+          position: relative;
+        }
+        /* Stili per il riempimento della progressbar */
+        #progress {
+          background-color: yellow;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    transition: width 1s linear;
+        }
+  
+        #countdown {
+    text-align: center;
+    padding: 10px;
+    font-size: 300%;
+  }
+  
+  #popup {
+      width: 80%;
+    height: 40%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 300%;
+  }
+  
+  #countdown, #progressbar {
+    display: none;
+  }
+  
+  #start-btn {
+    background-color: rgb(6, 141, 231);
+    color: white;
+    font-size: 150%;
+    padding: 10px 20px;
+    border-radius: 15px;
+  }
