@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Libreria La Vista - Malagoli</title>
+<style>
+:root{
+  --bg:#f6f1e7; --panel:#fffdf8; --ink:#2b2420; --muted:#7a6f65; --line:#e4dccd;
+  --accent:#9c4a2f; --accent-soft:#f1dfd5; --bar:#c9855f; --shadow:0 1px 2px rgba(60,40,20,.08),0 6px 20px rgba(60,40,20,.06);
+}
+:root[data-theme="dark"]{
+  --bg:#1b1815; --panel:#25211d; --ink:#efe7db; --muted:#a39889; --line:#3a342d;
+  --accent:#e2916a; --accent-soft:#3a2a22; --bar:#b9724f; --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,.serif{font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-weight:600;letter-spacing:.01em}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+header{padding:36px 0 18px}
+header .row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+h1{margin:0;font-size:clamp(28px,5vw,44px);line-height:1.1}
+.sub{color:var(--muted);margin-top:6px}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+button,select,input{font:inherit;color:inherit}
+.btn{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer;transition:.15s}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{opacity:.9;color:#fff}
+.btn.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:10px 0 24px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
+.kpi b{display:block;font-size:28px;font-family:"Iowan Old Style",Georgia,serif;line-height:1.1}
+.kpi span{color:var(--muted);font-size:13px}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+.search{display:flex;gap:10px;align-items:center}
+.search input{flex:1;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:12px 14px;font-size:17px;outline:none}
+.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px}
+.filters label{font-size:12px;color:var(--muted);display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em}
+.filters select{width:100%;padding:9px 10px;border:1px solid var(--line);background:var(--bg);border-radius:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;align-items:center}
+.chips small{color:var(--muted);margin-right:4px;text-transform:uppercase;letter-spacing:.06em;font-size:12px}
+.chip{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:3px 11px;font-size:13px;cursor:pointer}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:22px 0 10px}
+.bar .count{color:var(--muted)}
+.bar .right{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.bar select{padding:8px 10px;border:1px solid var(--line);background:var(--panel);border-radius:10px}
+
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);cursor:pointer;user-select:none;background:var(--panel);position:sticky;top:0;white-space:nowrap}
+th:hover{color:var(--accent)}
+th .arr{opacity:.9;color:var(--accent)}
+tr:last-child td{border-bottom:0}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:var(--accent-soft)}
+td.t{font-weight:600}
+td.pos span{background:var(--accent-soft);color:var(--accent);padding:2px 8px;border-radius:6px;font-size:13px;white-space:nowrap}
+.tablewrap{overflow-x:auto}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;box-shadow:var(--shadow);transition:.15s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-3px);border-color:var(--accent)}
+.cover{aspect-ratio:2/3;background:var(--accent-soft);position:relative;display:flex;align-items:center;justify-content:center}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover .ph{padding:12px;text-align:center;font-family:"Iowan Old Style",Georgia,serif;font-size:15px;color:var(--accent)}
+.card .meta{padding:10px 12px 12px}
+.card .meta b{display:block;line-height:1.25;font-size:14px}
+.card .meta span{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.card .pos{display:inline-block;margin-top:6px;background:var(--accent-soft);color:var(--accent);padding:1px 8px;border-radius:6px;font-size:12px}
+
+.pager{display:flex;justify-content:center;align-items:center;gap:12px;margin:18px 0}
+.empty{text-align:center;padding:50px 10px;color:var(--muted)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin:12px 0 50px}
+.stats h3{margin:0 0 10px;font-size:18px}
+.hb{display:grid;grid-template-columns:minmax(80px,38%) 1fr auto;gap:8px;align-items:center;font-size:14px;margin:5px 0}
+.hb .l{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hb .tr{background:var(--bg);border-radius:6px;height:12px;overflow:hidden}
+.hb .tr i{display:block;height:100%;background:var(--bar);border-radius:6px}
+.hb .n{color:var(--muted);font-variant-numeric:tabular-nums}
+.cols{display:flex;align-items:flex-end;gap:6px;height:150px;padding-top:10px}
+.cols div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;font-size:11px;color:var(--muted)}
+.cols i{display:block;width:100%;background:var(--bar);border-radius:5px 5px 0 0;min-height:2px}
+.cols b{font-weight:500;color:var(--ink);font-size:11px}
+
+dialog{border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--ink);padding:0;max-width:560px;width:calc(100% - 30px);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+.dl{display:grid;grid-template-columns:140px 1fr;gap:18px;padding:22px}
+.dl .cover{border-radius:10px;overflow:hidden}
+.dl h2{margin:0 0 4px;font-size:22px;line-height:1.2}
+.dl dl{margin:12px 0 0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14px}
+.dl dt{color:var(--muted)}.dl dd{margin:0}
+.dl .x{grid-column:1/-1;text-align:right}
+@media(max-width:560px){.dl{grid-template-columns:1fr}.dl .cover{max-width:140px}}
+.note{color:var(--muted);font-size:13px;margin:6px 0 40px}
+footer{color:var(--muted);font-size:13px;padding:10px 0 40px;text-align:center}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="row">
+      <div>
+        <h1 class="serif">Libreria La Vista - Malagoli</h1>
+        <div class="sub" id="sub">Caricamento…</div>
+      </div>
+      <div class="tools">
+        <button class="btn" id="btnLoad" title="Carica un altro file CSV">📂 Carica CSV</button>
+        <button class="btn" id="btnTheme" title="Tema chiaro/scuro">🌓</button>
+        <input type="file" id="file" accept=".csv,text/csv" class="hidden">
+      </div>
+    </div>
+  </header>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="panel">
+    <div class="search">
+      <input id="q" type="search" placeholder="Cerca per titolo, autore, editore, ISBN, scaffale…" autocomplete="off">
+      <button class="btn" id="reset">Azzera</button>
+    </div>
+    <div class="filters">
+      <div><label for="fPub">Editore</label><select id="fPub"></select></div>
+      <div><label for="fDec">Decennio</label><select id="fDec"></select></div>
+      <div><label for="fAut">Autore</label><select id="fAut"></select></div>
+    </div>
+    <div class="chips" id="shelfChips"></div>
+  </section>
+
+  <div class="bar">
+    <div class="count" id="count"></div>
+    <div class="right">
+      <select id="sort" aria-label="Ordina">
+        <option value="titolo:asc">Titolo A→Z</option>
+        <option value="titolo:desc">Titolo Z→A</option>
+        <option value="autore:asc">Autore A→Z</option>
+        <option value="anno:asc">Anno (più vecchi)</option>
+        <option value="anno:desc">Anno (più recenti)</option>
+        <option value="pos:asc">Posizione</option>
+      </select>
+      <button class="btn active" id="vTable">☰ Tabella</button>
+      <button class="btn" id="vCards">▦ Copertine</button>
+      <button class="btn primary" id="dlCsv">⬇ CSV</button>
+      <button class="btn" id="dlJson">⬇ JSON</button>
+    </div>
+  </div>
+
+  <div id="results"></div>
+  <div class="pager" id="pager"></div>
+
+  <h2 class="serif" style="margin:36px 0 0">Statistiche <small style="font-weight:400;font-size:14px;color:var(--muted)" id="statNote"></small></h2>
+  <section class="stats" id="stats"></section>
+
+  <footer>Dati da <code>libri.csv</code> · copertine da Open Library quando disponibili</footer>
+</div>
+
+<dialog id="dlg"></dialog>
+
+<script>
+/* ============ CONFIG ============ */
+const CSV_URL = "libri.csv";          // metti qui il percorso del tuo CSV
+const PAGE_SIZE = 40;
+
+/* Dati di esempio, usati solo se libri.csv non si trova (es. aprendo il file in locale) */
+const SAMPLE = `isbn;titolo;autore;editore;anno;posizione
+9788806219451;Il nome della rosa;Umberto Eco;Bompiani;1980;A1
+9788845292613;Se questo è un uomo;Primo Levi;Einaudi;1958;A1
+9788807881701;Il barone rampante;Italo Calvino;Mondadori;1957;A2
+9788811814689;Cent'anni di solitudine;Gabriel García Márquez;Mondadori;1968;A2
+9788804668237;Il Gattopardo;Giuseppe Tomasi di Lampedusa;Feltrinelli;1958;A3
+9788854169937;La coscienza di Zeno;Italo Svevo;Garzanti;1923;A3
+9788806134921;Le città invisibili;Italo Calvino;Einaudi;1972;A1
+9788817106603;Il fu Mattia Pascal;Luigi Pirandello;Mondadori;1904;B1
+9788845933158;Lessico famigliare;Natalia Ginzburg;Einaudi;1963;B1
+9788807900839;Siddharta;Hermann Hesse;Adelphi;1922;B2
+9788845921254;Il piccolo principe;Antoine de Saint-Exupéry;Bompiani;1943;B2
+9788804667742;Il deserto dei Tartari;Dino Buzzati;Mondadori;1940;B2
+;Storia d'Italia (vol. 2);Indro Montanelli;Rizzoli;1975;C1`;
+
+/* ============ UTIL ============ */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const norm = s => String(s ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const natural = (a, b) => String(a).localeCompare(String(b), "it", {numeric: true, sensitivity: "base"});
+
+function parseCSV(text){
+  text = text.replace(/^\uFEFF/, "");
+  const first = text.split(/\r?\n/, 1)[0] || "";
+  const delim = [";", ",", "\t"].map(d => [d, first.split(d).length]).sort((a, b) => b[1] - a[1])[0][0];
+  const rows = []; let row = [], cur = "", q = false;
+  for (let i = 0; i < text.length; i++){
+    const c = text[i];
+    if (q){
+      if (c === '"'){ if (text[i+1] === '"'){ cur += '"'; i++; } else q = false; }
+      else cur += c;
+    } else if (c === '"') q = true;
+    else if (c === delim){ row.push(cur); cur = ""; }
+    else if (c === "\n" || c === "\r"){
+      if (c === "\r" && text[i+1] === "\n") i++;
+      row.push(cur); cur = ""; if (row.some(x => x.trim() !== "")) rows.push(row); row = [];
+    } else cur += c;
+  }
+  row.push(cur); if (row.some(x => x.trim() !== "")) rows.push(row);
+  return rows;
+}
+
+/* Riconosce le colonne anche se l'app ha nomi diversi (Libib, LibraryThing, ecc.) */
+const ALIASES = {
+  isbn:   ["isbn","ean_isbn13","isbn13","isbn_13","ean","upc_isbn10","isbn10"],
+  titolo: ["titolo","title"],
+  autore: ["autore","autori","author","authors","creators","creator"],
+  editore:["editore","casa editrice","publisher"],
+  anno:   ["anno","year","publish_date","publication_date","published","date"],
+  pos:    ["posizione","scaffale","scompartimento","location","group","collection","tags","shelf"],
+  note:   ["note","notes","description"]
+};
+function toBooks(rows){
+  const head = rows[0].map(h => norm(h).trim());
+  const idx = {};
+  for (const k in ALIASES){ idx[k] = -1; for (const a of ALIASES[k]){ const i = head.indexOf(norm(a)); if (i >= 0){ idx[k] = i; break; } } }
+  return rows.slice(1).map(r => {
+    const g = k => idx[k] >= 0 ? (r[idx[k]] || "").trim() : "";
+    const y = (g("anno").match(/\b(1[0-9]{3}|20[0-9]{2})\b/) || [])[1] || "";
+    const b = { isbn: g("isbn").replace(/[^0-9Xx]/g, ""), titolo: g("titolo"), autore: g("autore"),
+                editore: g("editore"), anno: y ? +y : "", pos: g("pos"), note: g("note") };
+    b.hay = norm([b.titolo, b.autore, b.editore, b.isbn, b.pos, b.anno, b.note].join(" "));
+    return b;
+  }).filter(b => b.titolo || b.isbn);
+}
+
+/* ============ STATO ============ */
+let ALL = [], VIEW = [], page = 1, view = "table";
+const sort = { key: "titolo", dir: "asc" };
+const F = { q: "", shelves: new Set(), pub: "", dec: "", aut: "" };
+
+/* ============ INIT ============ */
+async function init(){
+  let text;
+  try { const r = await fetch(CSV_URL); if (!r.ok) throw 0; text = await r.text(); $("#sub").textContent = ""; }
+  catch { text = SAMPLE; $("#sub").textContent = "Dati di esempio – non ho trovato libri.csv (usa “Carica CSV” o pubblica il file accanto a questa pagina)"; }
+  setData(text);
+}
+function setData(text){
+  ALL = toBooks(parseCSV(text));
+  Object.assign(F, { q: "", shelves: new Set(), pub: "", dec: "", aut: "" });
+  $("#q").value = ""; page = 1;
+  buildFilters(); apply();
+}
+
+function opts(sel, first, items){
+  sel.innerHTML = `<option value="">${first}</option>` + items.map(([v, l]) => `<option value="${esc(v)}">${esc(l)}</option>`).join("");
+}
+function countBy(arr, f){ const m = new Map(); arr.forEach(x => { const k = f(x); if (k !== "" && k != null) m.set(k, (m.get(k) || 0) + 1); }); return m; }
+
+function buildFilters(){
+  const pubs = [...countBy(ALL, b => b.editore)].sort((a, b) => natural(a[0], b[0]));
+  opts($("#fPub"), `Tutti (${pubs.length})`, pubs.map(([k, n]) => [k, `${k} (${n})`]));
+  const decs = [...countBy(ALL, b => b.anno ? Math.floor(b.anno / 10) * 10 : "")].sort((a, b) => a[0] - b[0]);
+  opts($("#fDec"), "Tutti", decs.map(([k, n]) => [k, `${k}s (${n})`]));
+  const auts = [...countBy(ALL, b => b.autore)].sort((a, b) => natural(a[0], b[0]));
+  opts($("#fAut"), `Tutti (${auts.length})`, auts.map(([k, n]) => [k, `${k} (${n})`]));
+  const shelves = [...countBy(ALL, b => b.pos)].sort((a, b) => natural(a[0], b[0]));
+  $("#shelfChips").innerHTML = shelves.length
+    ? `<small>Scaffale</small>` + shelves.map(([k, n]) => `<button class="chip" data-s="${esc(k)}">${esc(k)} · ${n}</button>`).join("")
+    : "";
+}
+
+/* ============ FILTRO + ORDINE ============ */
+function apply(){
+  const terms = norm(F.q).split(/\s+/).filter(Boolean);
+  VIEW = ALL.filter(b =>
+    terms.every(t => b.hay.includes(t)) &&
+    (!F.shelves.size || F.shelves.has(b.pos)) &&
+    (!F.pub || b.editore === F.pub) &&
+    (!F.aut || b.autore === F.aut) &&
+    (!F.dec || (b.anno && Math.floor(b.anno / 10) * 10 === +F.dec))
+  );
+  const k = sort.key, d = sort.dir === "asc" ? 1 : -1;
+  VIEW.sort((a, b) => {
+    if (k === "anno"){ // anni mancanti sempre in fondo
+      if (a.anno === "" && b.anno === "") return 0; if (a.anno === "") return 1; if (b.anno === "") return -1;
+      return (a.anno - b.anno) * d;
+    }
+    return natural(a[k], b[k]) * d || natural(a.titolo, b.titolo);
+  });
+  const maxPage = Math.max(1, Math.ceil(VIEW.length / PAGE_SIZE));
+  if (page > maxPage) page = maxPage;
+  render();
+}
+
+/* ============ RENDER ============ */
+function coverHTML(b){
+  const ph = `<div class="ph">${esc(b.titolo)}</div>`;
+  if (!b.isbn) return ph;
+  return ph + `<img loading="lazy" alt="" src="https://covers.openlibrary.org/b/isbn/${b.isbn}-M.jpg?default=false" onerror="this.remove()">`;
+}
+function render(){
+  const n = VIEW.length;
+  $("#count").textContent = `${n} ${n === 1 ? "libro" : "libri"}${n !== ALL.length ? ` su ${ALL.length}` : ""}`;
+  const slice = VIEW.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  const R = $("#results");
+  if (!n){ R.innerHTML = `<div class="empty">Nessun libro corrisponde ai filtri.</div>`; }
+  else if (view === "table"){
+    const th = (k, l) => `<th data-k="${k}">${l}${sort.key === k ? `<span class="arr"> ${sort.dir === "asc" ? "▲" : "▼"}</span>` : ""}</th>`;
+    R.innerHTML = `<div class="tablewrap"><table><thead><tr>${th("titolo","Titolo")}${th("autore","Autore")}${th("editore","Editore")}${th("anno","Anno")}${th("pos","Posizione")}</tr></thead><tbody>` +
+      slice.map(b => `<tr data-i="${ALL.indexOf(b)}"><td class="t">${esc(b.titolo)}</td><td>${esc(b.autore)}</td><td>${esc(b.editore)}</td><td>${b.anno}</td><td class="pos">${b.pos ? `<span>${esc(b.pos)}</span>` : ""}</td></tr>`).join("") +
+      `</tbody></table></div>`;
+  } else {
+    R.innerHTML = `<div class="cards">` + slice.map(b =>
+      `<div class="card" data-i="${ALL.indexOf(b)}"><div class="cover">${coverHTML(b)}</div><div class="meta"><b>${esc(b.titolo)}</b><span>${esc(b.autore)}</span>${b.pos ? `<em class="pos">${esc(b.pos)}</em>` : ""}</div></div>`).join("") + `</div>`;
+  }
+  const pages = Math.max(1, Math.ceil(n / PAGE_SIZE));
+  $("#pager").innerHTML = pages > 1
+    ? `<button class="btn" id="prev" ${page === 1 ? "disabled" : ""}>←</button><span>Pagina ${page} di ${pages}</span><button class="btn" id="next" ${page === pages ? "disabled" : ""}>→</button>` : "";
+  renderKpis(); renderStats();
+}
+
+function bars(map, limit){
+  const arr = [...map].sort((a, b) => b[1] - a[1] || natural(a[0], b[0])).slice(0, limit);
+  const max = arr.length ? arr[0][1] : 1;
+  return arr.map(([k, n]) => `<div class="hb"><span class="l" title="${esc(k)}">${esc(k)}</span><span class="tr"><i style="width:${n / max * 100}%"></i></span><span class="n">${n}</span></div>`).join("") || `<div class="note">Nessun dato</div>`;
+}
+function renderKpis(){
+  const years = VIEW.map(b => b.anno).filter(Boolean);
+  const uniq = f => new Set(VIEW.map(f).filter(Boolean)).size;
+  const noIsbn = VIEW.filter(b => !b.isbn).length;
+  const med = years.length ? [...years].sort((a, b) => a - b)[Math.floor(years.length / 2)] : "–";
+  $("#kpis").innerHTML = [
+    [VIEW.length, "libri"], [uniq(b => b.autore), "autori"], [uniq(b => b.editore), "editori"],
+    [years.length ? Math.min(...years) : "–", "più antico"], [med, "anno mediano"], [noIsbn, "senza ISBN"]
+  ].map(([v, l]) => `<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join("");
+}
+function renderStats(){
+  $("#statNote").textContent = VIEW.length !== ALL.length ? "(sui libri filtrati)" : "";
+  const dec = [...countBy(VIEW, b => b.anno ? Math.floor(b.anno / 10) * 10 : "")].sort((a, b) => a[0] - b[0]);
+  const dmax = Math.max(1, ...dec.map(d => d[1]));
+  $("#stats").innerHTML =
+    `<div class="panel"><h3 class="serif">Autori più presenti</h3>${bars(countBy(VIEW, b => b.autore), 10)}</div>` +
+    `<div class="panel"><h3 class="serif">Editori</h3>${bars(countBy(VIEW, b => b.editore), 10)}</div>` +
+    `<div class="panel"><h3 class="serif">Per scaffale</h3>${bars(countBy(VIEW, b => b.pos), 12)}</div>` +
+    `<div class="panel"><h3 class="serif">Per decennio di pubblicazione</h3><div class="cols">` +
+      (dec.map(([k, n]) => `<div title="${k}s: ${n}"><b>${n}</b><i style="height:${n / dmax * 100}%"></i>${String(k).slice(2)}0</div>`).join("") || `<span class="note">Nessun dato</span>`) +
+    `</div></div>`;
+}
+
+/* ============ DETTAGLIO ============ */
+function openBook(i){
+  const b = ALL[i]; if (!b) return;
+  const rows = [["Autore", b.autore], ["Editore", b.editore], ["Anno", b.anno], ["ISBN", b.isbn], ["Posizione", b.pos], ["Note", b.note]].filter(r => r[1] !== "");
+  $("#dlg").innerHTML = `<div class="dl"><div class="cover">${coverHTML(b)}</div><div><h2 class="serif">${esc(b.titolo)}</h2><dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl></div><div class="x"><button class="btn" onclick="document.getElementById('dlg').close()">Chiudi</button></div></div>`;
+  $("#dlg").showModal();
+}
+
+/* ============ EXPORT ============ */
+function download(name, mime, content){
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([content], { type: mime })); a.download = name; a.click(); URL.revokeObjectURL(a.href);
+}
+const FIELDS = ["isbn", "titolo", "autore", "editore", "anno", "pos"];
+function exportCSV(){
+  const q = v => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const head = ["isbn", "titolo", "autore", "editore", "anno", "posizione"].join(";");
+  download("libreria.csv", "text/csv;charset=utf-8", "\uFEFF" + head + "\n" + VIEW.map(b => FIELDS.map(f => q(b[f])).join(";")).join("\n"));
+}
+function exportJSON(){
+  download("libreria.json", "application/json", JSON.stringify(VIEW.map(({ hay, ...r }) => r), null, 2));
+}
+
+/* ============ EVENTI ============ */
+let t; $("#q").addEventListener("input", e => { clearTimeout(t); t = setTimeout(() => { F.q = e.target.value; page = 1; apply(); }, 120); });
+$("#fPub").onchange = e => { F.pub = e.target.value; page = 1; apply(); };
+$("#fDec").onchange = e => { F.dec = e.target.value; page = 1; apply(); };
+$("#fAut").onchange = e => { F.aut = e.target.value; page = 1; apply(); };
+$("#shelfChips").addEventListener("click", e => {
+  const c = e.target.closest(".chip"); if (!c) return;
+  const s = c.dataset.s; F.shelves.has(s) ? F.shelves.delete(s) : F.shelves.add(s);
+  c.classList.toggle("on"); page = 1; apply();
+});
+$("#reset").onclick = () => {
+  Object.assign(F, { q: "", shelves: new Set(), pub: "", dec: "", aut: "" });
+  $("#q").value = ""; $("#fPub").value = $("#fDec").value = $("#fAut").value = "";
+  document.querySelectorAll(".chip.on").forEach(c => c.classList.remove("on")); page = 1; apply();
+};
+$("#sort").onchange = e => { [sort.key, sort.dir] = e.target.value.split(":"); apply(); };
+$("#results").addEventListener("click", e => {
+  const th = e.target.closest("th[data-k]");
+  if (th){ const k = th.dataset.k; sort.dir = sort.key === k && sort.dir === "asc" ? "desc" : "asc"; sort.key = k; $("#sort").value = ""; apply(); return; }
+  const r = e.target.closest("[data-i]"); if (r) openBook(+r.dataset.i);
+});
+$("#pager").addEventListener("click", e => {
+  if (e.target.id === "prev") page--; else if (e.target.id === "next") page++; else return;
+  render(); window.scrollTo({ top: $(".bar").offsetTop - 20, behavior: "smooth" });
+});
+function setView(v){ view = v; $("#vTable").classList.toggle("active", v === "table"); $("#vCards").classList.toggle("active", v === "cards"); render(); }
+$("#vTable").onclick = () => setView("table"); $("#vCards").onclick = () => setView("cards");
+$("#dlCsv").onclick = exportCSV; $("#dlJson").onclick = exportJSON;
+$("#btnLoad").onclick = () => $("#file").click();
+$("#file").onchange = async e => { const f = e.target.files[0]; if (f){ setData(await f.text()); $("#sub").textContent = f.name; } };
+$("#dlg").addEventListener("click", e => { if (e.target === $("#dlg")) $("#dlg").close(); });
+$("#btnTheme").onclick = () => {
+  const d = document.documentElement, dark = d.dataset.theme === "dark" || (!d.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches);
+  d.dataset.theme = dark ? "light" : "dark";
+};
+if (matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.dataset.theme = "dark";
+
+init();
+</script>
+</body>
+</html>
