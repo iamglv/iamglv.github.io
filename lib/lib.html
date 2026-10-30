@@ -101,6 +101,45 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
 .note{color:var(--muted);font-size:13px;margin:6px 0 40px}
 footer{color:var(--muted);font-size:13px;padding:10px 0 40px;text-align:center}
 .hidden{display:none!important}
+
+
+.library-schemas{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+  margin:36px 0 0;
+}
+
+.schema-card{
+  margin:0;
+  padding:12px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+}
+
+.schema-card img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:620px;
+  object-fit:contain;
+  border-radius:10px;
+}
+
+.schema-card figcaption{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:13px;
+  text-align:center;
+}
+
+@media(max-width:700px){
+  .library-schemas{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
 <body>
@@ -155,6 +194,26 @@ footer{color:var(--muted);font-size:13px;padding:10px 0 40px;text-align:center}
   <div id="results"></div>
   <div class="pager" id="pager"></div>
 
+  <section class="library-schemas" aria-label="Schemi della libreria">
+  <figure class="schema-card">
+    <img
+      src="schema_libreria.png"
+      alt="Schema della libreria con le posizioni da A1 a D7"
+      loading="lazy"
+      decoding="async">
+    <figcaption>Schema della libreria</figcaption>
+  </figure>
+
+  <figure class="schema-card">
+    <img
+      src="schema_libreria_progresso.png"
+      alt="Schema della libreria con l'avanzamento delle posizioni"
+      loading="lazy"
+      decoding="async">
+    <figcaption>Avanzamento della libreria</figcaption>
+  </figure>
+</section>
+
   <h2 class="serif" style="margin:36px 0 0">Statistiche <small style="font-weight:400;font-size:14px;color:var(--muted)" id="statNote"></small></h2>
   <section class="stats" id="stats"></section>
 
@@ -170,19 +229,13 @@ const PAGE_SIZE = 40;
 
 /* Dati di esempio, usati solo se libri.csv non si trova (es. aprendo il file in locale) */
 const SAMPLE = `isbn;titolo;autore;editore;anno;posizione
-9788806219451;Il nome della rosa;Umberto Eco;Bompiani;1980;A1
-9788845292613;Se questo è un uomo;Primo Levi;Einaudi;1958;A1
-9788807881701;Il barone rampante;Italo Calvino;Mondadori;1957;A2
-9788811814689;Cent'anni di solitudine;Gabriel García Márquez;Mondadori;1968;A2
-9788804668237;Il Gattopardo;Giuseppe Tomasi di Lampedusa;Feltrinelli;1958;A3
-9788854169937;La coscienza di Zeno;Italo Svevo;Garzanti;1923;A3
-9788806134921;Le città invisibili;Italo Calvino;Einaudi;1972;A1
-9788817106603;Il fu Mattia Pascal;Luigi Pirandello;Mondadori;1904;B1
-9788845933158;Lessico famigliare;Natalia Ginzburg;Einaudi;1963;B1
-9788807900839;Siddharta;Hermann Hesse;Adelphi;1922;B2
-9788845921254;Il piccolo principe;Antoine de Saint-Exupéry;Bompiani;1943;B2
-9788804667742;Il deserto dei Tartari;Dino Buzzati;Mondadori;1940;B2
-;Storia d'Italia (vol. 2);Indro Montanelli;Rizzoli;1975;C1`;
+9788804741190;Il mastino dei Baskerville;Arthur Conan Doyle, Oreste Del Buono;Mondadori;2021;A1
+9788821561641;Un uomo così. L'ingegnere Uberto Mori. Ediz. illustrata;Giuliana Pelucchi;San Paolo Edizioni;2008;A1
+9788895694634;Dal libro al piatto;Andrini Mariavittoria;In magazine;2017;A1
+9788807923432;Osso;Michele Serra, Alessandra Sanna;Feltrinelli;2021;A1
+9788884515803;La fabbrica di cioccolato;Roald Dahl;Salani;2005;A3
+9788804517436;La folle vicenda del mio super diario (e molto, molto di più);Kate Klise;Mondadori;2003;A3
+9788862560368;Le fiabe di Beda il Bardo;J. K. Rowling;Salani;2008;A3`;
 
 /* ============ UTIL ============ */
 const $ = s => document.querySelector(s);
@@ -218,7 +271,7 @@ const ALIASES = {
   autore: ["autore","autori","author","authors","creators","creator"],
   editore:["editore","casa editrice","publisher"],
   anno:   ["anno","year","publish_date","publication_date","published","date"],
-  pos:    ["posizione","scaffale","scompartimento","location","group","collection","tags","shelf"],
+  pos:    ["collection"],
   note:   ["note","notes","description"]
 };
 function toBooks(rows){
